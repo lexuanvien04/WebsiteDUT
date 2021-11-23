@@ -1,5 +1,5 @@
-﻿
-
+﻿@using WebsiteDUT.Model
+@using WebsiteDUT.Common
 
 <nav class="navbar header-navbar pcoded-header">
     <div class="navbar-wrapper">
@@ -82,7 +82,16 @@
                 <li class="user-profile header-notification">
                     <a href="#!" class="waves-effect waves-light">
                         <img src="~/Assets/Admin/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image">
-                        <span>John Doe</span>
+                        <span>
+                            @{ var session = (LoginModels)Session[Constants.USER_SESSION];
+                                var result = "noname";
+                                if (result != null)
+                                { @session.TenTruyCap;
+                            }
+                            else
+                            { @result;
+                        } }
+                        </span>
                         <i class="ti-angle-down"></i>
                     </a>
                     <ul class="show-notification profile-notification">
@@ -107,7 +116,7 @@
                             </a>
                         </li>
                         <li class="waves-effect waves-light">
-                            <a href="auth-normal-sign-in.html">
+                            <a  href="@Url.Action("Logout","Home")">
                                 <i class="ti-layout-sidebar-left"></i> Logout
                             </a>
                         </li>

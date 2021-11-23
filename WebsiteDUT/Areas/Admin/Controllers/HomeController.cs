@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebsiteDUT.Common;
 
 namespace WebsiteDUT.Areas.Admin.Controllers
 {
@@ -12,6 +13,11 @@ namespace WebsiteDUT.Areas.Admin.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+        public ActionResult Logout()
+        {
+            Session[Constants.USER_SESSION] = null;
+            return RedirectToAction("Index", "Login");
         }
     }
 }
