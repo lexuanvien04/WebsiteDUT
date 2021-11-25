@@ -20,7 +20,6 @@ namespace ModelEF.EF
         public virtual DbSet<NguoiDung> NguoiDungs { get; set; }
         public virtual DbSet<QuangCao> QuangCaos { get; set; }
         public virtual DbSet<QuyenNguoiDung> QuyenNguoiDungs { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TagCould> TagCoulds { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

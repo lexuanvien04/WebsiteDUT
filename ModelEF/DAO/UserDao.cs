@@ -26,6 +26,20 @@ namespace ModelEF.DAO
             }
             else { return 1; }
         }
-
+        public List<NguoiDung> ListAll()
+        {
+            return db.NguoiDungs.ToList();
+        }
+        public NguoiDung Find(string TenTruycap)
+        {
+            return db.NguoiDungs.Find(TenTruycap);
+        }
+        public bool ChangeStatus(long MaNguoiDung)
+        {
+            var user = db.NguoiDungs.Find(MaNguoiDung);
+            user.TrangThai = !user.TrangThai;
+            db.SaveChanges();
+            return user.TrangThai;
+        }
     }
 }

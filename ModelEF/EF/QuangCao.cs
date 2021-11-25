@@ -23,7 +23,6 @@ namespace ModelEF.EF
 
         public DateTime? NgayCapNhat { get; set; }
 
-        [StringLength(100)]
-        public string TrangThai { get; set; }
+        public bool? TrangThai { get; set; }
     }
 }

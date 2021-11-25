@@ -23,8 +23,7 @@ namespace ModelEF.EF
         [StringLength(100)]
         public string TenCould { get; set; }
 
-        [StringLength(100)]
-        public string TrangThai { get; set; }
+        public bool? TrangThai { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChuyenMuc> ChuyenMucs { get; set; }

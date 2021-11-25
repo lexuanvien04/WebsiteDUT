@@ -138,6 +138,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NguoiDungController.cs" />
     <Compile Include="Code\SessionHelper.cs" />
     <Compile Include="Code\UserSession.cs" />
     <Compile Include="Common\Constants.cs" />
@@ -151,6 +152,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Admin\css\animate.css\css\animate.css" />
+    <Content Include="Assets\Admin\css\bootstrap-reset.css" />
+    <Content Include="Assets\Admin\css\bootstrap.min.css" />
     <Content Include="Assets\Admin\css\bootstrap\css\bootstrap.min.css" />
     <Content Include="Assets\Admin\css\chartist\chartist.css" />
     <Content Include="Assets\Admin\css\component.css" />
@@ -233,6 +236,7 @@
     <Content Include="Assets\Admin\js\color-json-common-page.js" />
     <Content Include="Assets\Admin\js\common-pages.js" />
     <Content Include="Assets\Admin\js\common-pages.min.js" />
+    <Content Include="Assets\Admin\js\controller\userController.js" />
     <Content Include="Assets\Admin\js\counter.js" />
     <Content Include="Assets\Admin\js\float\curvedLines.js" />
     <Content Include="Assets\Admin\js\float\jquery.flot.categories.js" />
@@ -379,6 +383,8 @@
     <Content Include="Areas\Admin\Views\Shared\_Navigation.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Login\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\NguoiDung\Index.cshtml" />
+    <Content Include="Assets\Admin\css\bootstrap.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

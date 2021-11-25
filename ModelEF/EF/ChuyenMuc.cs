@@ -45,8 +45,7 @@ namespace ModelEF.EF
         [StringLength(10)]
         public string MaNguoiDung { get; set; }
 
-        [StringLength(100)]
-        public string Trangthai { get; set; }
+        public bool? Trangthai { get; set; }
 
         public virtual LoaiChuyenMuc LoaiChuyenMuc { get; set; }
 
