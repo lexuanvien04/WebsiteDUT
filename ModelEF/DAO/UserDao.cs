@@ -1,4 +1,5 @@
 ﻿using ModelEF.EF;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -26,9 +27,15 @@ namespace ModelEF.DAO
             }
             else { return 1; }
         }
-        public List<NguoiDung> ListAll()
+        public IEnumerable<NguoiDung> ListWhereAll(string keysearch, int page, int pagesize)
         {
-            return db.NguoiDungs.ToList();
+            IQueryable<NguoiDung> model = db.NguoiDungs;
+            if (!string.IsNullOrEmpty(keysearch))
+            {
+                model = model.Where(x => x.HoTen.Contains(keysearch));
+            }
+
+            return model.OrderBy(x => x.HoTen).ToPagedList(page, pagesize);
         }
         public NguoiDung Find(string TenTruycap)
         {

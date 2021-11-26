@@ -8,13 +8,12 @@ using WebsiteDUT.Model;
 
 namespace WebsiteDUT.Areas.Admin.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         // GET: Admin/Home
         public ActionResult Index()
         {
-            var session = (LoginModels)Session[Constants.USER_SESSION];
-            if (session == null) return RedirectToAction("Index", "Login");
+            
             return View();
         }
         public ActionResult Logout()

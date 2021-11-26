@@ -1,0 +1,99 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<ModelEF.EF.NguoiDung>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Basic table card start -->
+<div class="card">
+    @using (Html.BeginForm("Index", "NguoiDungs", FormMethod.Post))
+    {
+        <div class="card-header">
+            <h5><i class="fa fa-user" style="color: blue;"></i>&nbsp;DANH MỤC LOẠI CHUYÊN MỤC</h5>
+            <div class="card-header-right">
+                <ul class="list-unstyled card-option">
+                    <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                    <li><i class="fa fa-window-maximize full-card"></i></li>
+                    <li><i class="fa fa-minus minimize-card"></i></li>
+                    <li><i class="fa fa-refresh reload-card"></i></li>
+                    <li><i class="fa fa-trash close-card"></i></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="col-lg-12 form-group" style="margin-top: 20px;">
+            <div class="col-md-6" style="float:left;">
+                @Html.ActionLink("Tạo Mới", "Create", "Create", new { @class = "btn btn-danger" })
+            </div>
+            <div class="col-md-4" style="float:left;">
+                <input type="text" value="@ViewBag.SearchString" name="searchString" placeholder="Nhập từ khoá tìm kiếm" class="form-control">
+            </div>
+            <div class="col-md-2" style="float:left;">
+                <input style="background: #e3782c;" type="submit" value="Tìm Kiếm" class="btn btn-default" />
+            </div>
+        </div>
+      }
+    <div class="card-block table-border-style">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>
+                            Họ Tên
+                        </th>
+                        <th>
+                            Tên Truy Cập
+                        </th>
+                        <th>
+                            Mật Khẩu
+                        </th>
+                        <th>
+                            Ngày Cập Nhật
+                        </th>
+                        <th>
+                            Trạng Thái
+                        </th>
+                        <th>Chức Năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ var i = 1;}
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@i</td>
+                            <td>
+                                @item.HoTen
+                            </td>
+                            <td>
+                                @item.TenTruycap
+                            </td>
+                            <td>
+                                @item.MatKhau
+                            </td>
+                            <td>
+                                @item.NgayCapNhat
+                            </td>
+                            <td>
+                                @item.TrangThai
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.MaNguoiDung }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.MaNguoiDung }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.MaNguoiDung })
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                </tbody>
+            </table>
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))
+        </div>
+    </div>
+</div>
+
+
+<!-- Basic table card end -->

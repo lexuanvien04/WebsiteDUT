@@ -59,6 +59,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAO\ChuyenMucDao.cs" />
+    <Compile Include="DAO\DonViDao.cs" />
+    <Compile Include="DAO\LienKetDao.cs" />
+    <Compile Include="DAO\LoaiChuyenMucDao.cs" />
+    <Compile Include="DAO\LoaiDonViDao.cs" />
+    <Compile Include="DAO\QuangCaoDao.cs" />
+    <Compile Include="DAO\QuyenNguoiDungDao.cs" />
+    <Compile Include="DAO\TagCouldDao.cs" />
     <Compile Include="DAO\UserDao.cs" />
     <Compile Include="EF\ChuyenMuc.cs" />
     <Compile Include="EF\DonVi.cs" />

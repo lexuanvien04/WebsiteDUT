@@ -1,0 +1,59 @@
+﻿@model ModelEF.EF.QuangCao
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>QuangCao</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenQuangCao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenQuangCao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DuongDan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DuongDan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnhDaiDien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AnhDaiDien)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayCapNhat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayCapNhat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrangThai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrangThai)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaQuangCao }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
