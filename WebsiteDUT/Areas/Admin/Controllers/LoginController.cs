@@ -31,9 +31,21 @@ namespace WebsiteDUT.Areas.Admin.Controllers
                     Session.Add(Constants.USER_SESSION, login);
                     return RedirectToAction("Index", "Home");
                 }
+                else if (result == 0)
+                {
+                    ModelState.AddModelError("", "Tài khoản không tồn tại");
+                }
+                else if (result == -1)
+                {
+                    ModelState.AddModelError("", "Tài Khoản đang bị khoá.");
+                }
+                else if (result == -2)
+                {
+                    ModelState.AddModelError("", "Mật Khẩu không đúng.");
+                }
                 else
                 {
-                    ModelState.AddModelError("", "Đăng nhập thất bại");
+                    ModelState.AddModelError("", "Đăng nhập không đúng");
                 }
             }
             return View("Index");

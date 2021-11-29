@@ -34,7 +34,7 @@
                 <input style="background: #e3782c;" type="submit" value="Tìm Kiếm" class="btn btn-default" />
             </div>
         </div>
-      }
+    }
     <div class="card-block table-border-style">
         <div class="table-responsive">
             <table class="table">
@@ -64,32 +64,30 @@
                     @{ var i = 1;}
                     @foreach (var item in Model)
                     {
-                    <tr>
-                        <td>@i</td>
-                        <td>
-                            @item.MaNguoiDung
-                        </td>
-                        <td>
-                            @item.HoTen
-                        </td>
-                        <td>
-                            @item.TenTruycap
-                        </td>
-                        <td>
-                            @item.MatKhau
-                        </td>
-                        <td>
-                            @item.NgayCapNhat
-                        </td>
-                        <td>
-                            @item.TrangThai
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.MaNguoiDung }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.MaNguoiDung }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.MaNguoiDung })
-                        </td>
-                    </tr>
+                        <tr id="row_@item.MaNguoiDung">
+                            <td>@i</td>
+                            <td>
+                                @item.MaNguoiDung
+                            </td>
+                            <td>
+                                @item.HoTen
+                            </td>
+                            <td>
+                                @item.TenTruycap
+                            </td>
+                            <td>
+                                @item.MatKhau
+                            </td>
+                            <td>
+                                @item.NgayCapNhat
+                            </td>
+                            <td><a href="#" class="btn btn-danger btn-active" data-id="@item.MaNguoiDung">@(item.TrangThai ?"Kích hoạt":"Khoá")</a></td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.MaNguoiDung }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.MaNguoiDung }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.MaNguoiDung })
+                            </td>
+                        </tr>
                         i++;
                     }
                 </tbody>
@@ -98,6 +96,8 @@
         </div>
     </div>
 </div>
-
+@section jsFooter{
+    <script src="~/Assets/Admin/js/controller/userController.js"></script>
+}
 
 <!-- Basic table card end -->

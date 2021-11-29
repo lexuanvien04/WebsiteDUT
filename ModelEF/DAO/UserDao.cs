@@ -20,12 +20,29 @@ namespace ModelEF.DAO
 
         public int Login(string TenTruycap, string MatKhau)
         {
-            var result = db.NguoiDungs.SingleOrDefault(x => x.TenTruycap.Contains(TenTruycap) && x.MatKhau.Contains(MatKhau));
-            if(result == null)
+            var result = db.NguoiDungs.SingleOrDefault(x => x.TenTruycap == TenTruycap);
+            if (result == null)
             {
                 return 0;
             }
-            else { return 1; }
+            else
+            {
+                if (result.TrangThai == false)
+                {
+                    return -1;
+                }
+                else
+                {
+                    if (result.MatKhau == MatKhau)
+                    {
+                        return 1;
+                    }
+                    else
+                    {
+                        return -2;
+                    }
+                }
+            }
         }
         public IEnumerable<NguoiDung> ListWhereAll(string keysearch, int page, int pagesize)
         {
@@ -41,9 +58,13 @@ namespace ModelEF.DAO
         {
             return db.NguoiDungs.Find(TenTruycap);
         }
-        public bool ChangeStatus(long MaNguoiDung)
+        public NguoiDung FindTenTruycap(string TenTruycap, string MaNguoidung)
         {
-            var user = db.NguoiDungs.Find(MaNguoiDung);
+            return db.NguoiDungs.SingleOrDefault(x => x.TenTruycap.Contains(TenTruycap) || x.MaNguoiDung.Contains(MaNguoidung));
+        }
+        public bool ChangeTrangThai(string id)
+        {
+            var user = db.NguoiDungs.Find(id);
             user.TrangThai = !user.TrangThai;
             db.SaveChanges();
             return user.TrangThai;

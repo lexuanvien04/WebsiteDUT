@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using ModelEF.DAO;
 using ModelEF.EF;
+using WebsiteDUT.Common;
 
 namespace WebsiteDUT.Areas.Admin.Controllers
 {
@@ -63,18 +64,13 @@ namespace WebsiteDUT.Areas.Admin.Controllers
                         return View();
                     }
                     var dao = new UserDao();
-                    string result;
-                    result = dao.Insert(nguoiDung);
-
-                    if (result != null)
+                    if (dao.FindTenTruycap(nguoiDung.TenTruycap, nguoiDung.MaNguoiDung) != null)
                     {
-                        SetAlert("Tạo mới thành công!", "success");
-                        return RedirectToAction("Index", "NguoiDungs");
+                        SetAlert("tài khoản tồn tại!", "error");
+                        return View();
                     }
-                    else
-                    {
-                        SetAlert("Tạo mới thất bại!", "error");
-                    }
+                    var pass = Encryptor.EncryptorMD5(nguoiDung.MatKhau);
+                    nguoiDung.MatKhau = pass;
                     db.NguoiDungs.Add(nguoiDung);
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -151,6 +147,15 @@ namespace WebsiteDUT.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        [HttpPost]
+        public JsonResult ChangeTrangThai(string id)
+        {
+            var result = new UserDao().ChangeTrangThai(id);
+            return Json(new
+            {
+                status = result
+            });
         }
     }
 }
