@@ -8,7 +8,7 @@
     @using (Html.BeginForm("Index", "TagCoulds", FormMethod.Post))
     {
 <div class="card-header">
-    <h5><i class="fa fa-user" style="color: blue;"></i>&nbsp;DANH MỤC LOẠI CHUYÊN MỤC</h5>
+    <h5><i class="fa fa-user" style="color: blue;"></i>&nbsp;DANH MỤC TAG CLOUD</h5>
     <div class="card-header-right">
         <ul class="list-unstyled card-option">
             <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -37,8 +37,9 @@
                 <thead>
                     <tr>
                         <th>STT</th>
+                        <th>Mã TagCloud</th>
                         <th>
-                            Tên TagCould
+                            Tên TagCloud
                         </th>
                         <th>
                             Trạng Thái
@@ -50,20 +51,23 @@
                     @{ var i = 1;}
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <th>@i</th>
-                            <td>
-                                @item.TenCould
-                            </td>
-                            <td>
-                                @item.TrangThai
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.MaTagCould }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.MaTagCould }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.MaTagCould })
-                            </td>
-                        </tr>
+                    <tr>
+                        <th>@i</th>
+                        <td>
+                            @item.MaTagCould
+                        </td>
+                        <td>
+                            @item.TenCould
+                        </td>
+                        <td>
+                            @item.TrangThai
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.MaTagCould }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.MaTagCould }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.MaTagCould })
+                        </td>
+                    </tr>
                         i++;
                     }
                 </tbody>

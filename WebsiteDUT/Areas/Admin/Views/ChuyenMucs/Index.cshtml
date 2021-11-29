@@ -1,5 +1,6 @@
 ﻿@using PagedList.Mvc;
 @model PagedList.IPagedList<ModelEF.EF.ChuyenMuc>
+@using WebsiteDUT.Helper
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -10,7 +11,7 @@
     @using (Html.BeginForm("Index", "ChuyenMucs", FormMethod.Post))
     {
         <div class="card-header">
-            <h5><i class="fa fa-user" style="color: blue;"></i>&nbsp;DANH MỤC LOẠI CHUYÊN MỤC</h5>
+            <h5><i class="fa fa-user" style="color: blue;"></i>&nbsp;DANH MỤC CHUYÊN MỤC</h5>
             <div class="card-header-right">
                 <ul class="list-unstyled card-option">
                     <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -38,8 +39,11 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th> 
+                        <th>
                             STT
+                        </th>
+                        <th>
+                            Mã loại chuyên mục
                         </th>
                         <th>
                             Tên Loại Chuyên Muc
@@ -78,6 +82,9 @@
                     <tr>
                         <td>@i</td>
                         <td>
+                            @item.MaLoaiChuyenMuc   
+                        </td>
+                        <td>
                             @item.LoaiChuyenMuc.TenLoaiChuyenMuc
                         </td>
 
@@ -88,7 +95,7 @@
                             @item.TieuDe
                         </td>
                         <td>
-                            @item.AnhDaiDien
+                            @Html.Image(item.AnhDaiDien, "Image", new { width = "100px", heigth = "80px" })
                         </td>
                         <td style="width: 300px">
                             @item.NoiDung

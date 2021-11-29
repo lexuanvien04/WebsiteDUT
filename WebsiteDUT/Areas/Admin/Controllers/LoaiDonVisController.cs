@@ -15,7 +15,7 @@ namespace WebsiteDUT.Areas.Admin.Controllers
 {
     public class LoaiDonVisController : BaseController
     {
-        private WebsiteDTUDbContext db = new WebsiteDTUDbContext();
+        private WebsiteDUTDbContext db = new WebsiteDUTDbContext();
 
         // GET: Admin/LoaiDonVis
         public ActionResult Index(string searchString, int page = 1, int pagesize = 5)
@@ -55,11 +55,38 @@ namespace WebsiteDUT.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MaloaiDonVi,TenLoaiDonVi,TrangThai")] LoaiDonVi loaiDonVi)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.LoaiDonVis.Add(loaiDonVi);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    if (string.IsNullOrEmpty(loaiDonVi.MaloaiDonVi))
+                    {
+                        SetAlert("Không được để trống!", "warning");
+                        return View();
+                    }
+                    var dao = new LoaiDonViDao();
+                    string result;
+
+                    result = dao.Insert(loaiDonVi);
+
+                    if (result != null)
+                    {
+                        SetAlert("Tạo mới thành công!", "success");
+                        return RedirectToAction("Index", "LoaiDonVis");
+                    }
+                    else
+                    {
+                        SetAlert("Tạo mới thất bại!", "error");
+                    }
+
+                    db.LoaiDonVis.Add(loaiDonVi);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.Common.WriteLog("LoaiDonVis", "Create-Post", ex.ToString());
             }
 
             return View(loaiDonVi);

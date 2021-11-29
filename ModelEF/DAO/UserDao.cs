@@ -11,11 +11,11 @@ namespace ModelEF.DAO
 {
     public class UserDao
     {
-        private WebsiteDTUDbContext db = null;
+        private WebsiteDUTDbContext db = null;
         
         public UserDao()
         {
-            db = new WebsiteDTUDbContext();
+            db = new WebsiteDUTDbContext();
         }
 
         public int Login(string TenTruycap, string MatKhau)
@@ -47,6 +47,36 @@ namespace ModelEF.DAO
             user.TrangThai = !user.TrangThai;
             db.SaveChanges();
             return user.TrangThai;
+        }
+
+        public string Insert(NguoiDung entityNguoiDung)
+        {
+            var dao = Find(entityNguoiDung.MaNguoiDung);
+            if (dao == null)
+            {
+                db.NguoiDungs.Add(entityNguoiDung);
+            }
+            else
+            {
+                dao.TenTruycap = entityNguoiDung.TenTruycap;
+            }
+            db.SaveChanges();
+            return entityNguoiDung.MaNguoiDung;
+        }
+        
+        public string Edit(NguoiDung entity)
+        {
+            var dao = Find(entity.MaNguoiDung);
+            if (dao == null)
+            {
+                db.NguoiDungs.Add(entity);
+            }
+            else
+            {
+                dao.TenTruycap = entity.TenTruycap;
+            }
+            db.SaveChanges();
+            return entity.MaNguoiDung;
         }
     }
 }

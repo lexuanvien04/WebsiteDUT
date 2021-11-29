@@ -39,6 +39,7 @@
                 <thead>
                     <tr>
                         <th>STT</th>
+                        <th>Mã Loại đơn vị</th>
                         <th>
                             Tên loại đơn vị
                         </th>
@@ -52,20 +53,23 @@
                     @{ var i = 1;}
                     @foreach (var item in Model)
                      {
-                        <tr>
-                            <th>@i</th>
-                            <td>
-                                @item.TenLoaiDonVi
-                            </td>
-                            <td>
-                                @item.TrangThai
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.MaloaiDonVi }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.MaloaiDonVi }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.MaloaiDonVi })
-                            </td>
-                        </tr>
+                    <tr>
+                        <th>@i</th>
+                        <td>
+                            @item.MaloaiDonVi
+                        </td>
+                        <td>
+                            @item.TenLoaiDonVi
+                        </td>
+                        <td>
+                            @item.TrangThai
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.MaloaiDonVi }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.MaloaiDonVi }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.MaloaiDonVi })
+                        </td>
+                    </tr>
                         i++;
                     }
                     
@@ -74,6 +78,6 @@
             @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))
         </div>
     </div>
-
+    </div>
 
     <!-- Basic table card end -->

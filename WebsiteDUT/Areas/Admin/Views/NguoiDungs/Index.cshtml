@@ -11,7 +11,7 @@
     @using (Html.BeginForm("Index", "NguoiDungs", FormMethod.Post))
     {
         <div class="card-header">
-            <h5><i class="fa fa-user" style="color: blue;"></i>&nbsp;DANH MỤC LOẠI CHUYÊN MỤC</h5>
+            <h5><i class="fa fa-user" style="color: blue;"></i>&nbsp;DANH MỤC NGƯỜI DÙNG</h5>
             <div class="card-header-right">
                 <ul class="list-unstyled card-option">
                     <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -41,6 +41,7 @@
                 <thead>
                     <tr>
                         <th>STT</th>
+                        <th>MÃ người dùng</th>
                         <th>
                             Họ Tên
                         </th>
@@ -63,29 +64,32 @@
                     @{ var i = 1;}
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>@i</td>
-                            <td>
-                                @item.HoTen
-                            </td>
-                            <td>
-                                @item.TenTruycap
-                            </td>
-                            <td>
-                                @item.MatKhau
-                            </td>
-                            <td>
-                                @item.NgayCapNhat
-                            </td>
-                            <td>
-                                @item.TrangThai
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.MaNguoiDung }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.MaNguoiDung }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.MaNguoiDung })
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>@i</td>
+                        <td>
+                            @item.MaNguoiDung
+                        </td>
+                        <td>
+                            @item.HoTen
+                        </td>
+                        <td>
+                            @item.TenTruycap
+                        </td>
+                        <td>
+                            @item.MatKhau
+                        </td>
+                        <td>
+                            @item.NgayCapNhat
+                        </td>
+                        <td>
+                            @item.TrangThai
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.MaNguoiDung }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.MaNguoiDung }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.MaNguoiDung })
+                        </td>
+                    </tr>
                         i++;
                     }
                 </tbody>

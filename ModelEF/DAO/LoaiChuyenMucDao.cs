@@ -10,11 +10,11 @@ namespace ModelEF.DAO
 {
     public class LoaiChuyenMucDao
     {
-        private WebsiteDTUDbContext db;
+        private WebsiteDUTDbContext db;
 
         public LoaiChuyenMucDao()
         {
-            db = new WebsiteDTUDbContext();
+            db = new WebsiteDUTDbContext();
         }
         public IEnumerable<LoaiChuyenMuc> ListWhereAll(string keysearch, int page, int pagesize)
         {
@@ -25,6 +25,41 @@ namespace ModelEF.DAO
             }
 
             return model.OrderBy(x => x.TenLoaiChuyenMuc).ToPagedList(page, pagesize);
+        }
+
+        public LoaiChuyenMuc Find(string id)
+        {
+            return db.LoaiChuyenMucs.Find(id);
+        }
+
+        public string Insert(LoaiChuyenMuc entityLoaiCM)
+        {
+            var dao = Find(entityLoaiCM.MaLoaiChuyenMuc);
+            if (dao == null)
+            {
+                db.LoaiChuyenMucs.Add(entityLoaiCM);
+            }
+            else
+            {
+                dao.TenLoaiChuyenMuc = entityLoaiCM.TenLoaiChuyenMuc;
+            }
+            db.SaveChanges();
+            return entityLoaiCM.MaLoaiChuyenMuc;
+        }
+
+        public string Edit(LoaiChuyenMuc entity)
+        {
+            var dao = Find(entity.MaLoaiChuyenMuc);
+            if (dao == null)
+            {
+                db.LoaiChuyenMucs.Add(entity);
+            }
+            else
+            {
+                dao.TenLoaiChuyenMuc = entity.TenLoaiChuyenMuc;
+            }
+            db.SaveChanges();
+            return entity.MaLoaiChuyenMuc;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace WebsiteDUT.Areas.Admin.Controllers
 {
     public class DonVisController : BaseController
     {
-        private WebsiteDTUDbContext db = new WebsiteDTUDbContext();
+        private WebsiteDUTDbContext db = new WebsiteDUTDbContext();
 
         // GET: Admin/DonVis
         public ActionResult Index(string searchString, int page = 1, int pagesize = 10)
@@ -53,13 +53,38 @@ namespace WebsiteDUT.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaDonVi,MaLoaiDonVi,TenDonVi,TrangThai")] DonVi donVi)
+        public ActionResult Create(DonVi donVi)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.DonVis.Add(donVi);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    if (string.IsNullOrEmpty(donVi.MaDonVi))
+                    {
+                        SetAlert("Không được để trống!", "warning");
+                        return View();
+                    }
+                    var dao = new DonViDao();
+                    string result;
+                    result = dao.Insert(donVi);
+
+                    if (result != null)
+                    {
+                        SetAlert("Tạo mới thành công!", "success");
+                        return RedirectToAction("Index", "DonVis");
+                    }
+                    else
+                    {
+                        SetAlert("Tạo mới thất bại!", "error");
+                    }
+                    db.DonVis.Add(donVi);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.Common.WriteLog("DonVis", "Create-Post", ex.ToString());
             }
 
             ViewBag.MaLoaiDonVi = new SelectList(db.LoaiDonVis, "MaloaiDonVi", "TenLoaiDonVi", donVi.MaLoaiDonVi);

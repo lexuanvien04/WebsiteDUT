@@ -52,6 +52,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Logger">
+      <HintPath>D:\C# Cuối kì\Logger.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
@@ -150,12 +153,14 @@
     <Compile Include="Areas\Admin\Controllers\TagCouldsController.cs" />
     <Compile Include="Code\SessionHelper.cs" />
     <Compile Include="Code\UserSession.cs" />
+    <Compile Include="Common\Common.cs" />
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\Encryptor.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\HtmlExtensions.cs" />
     <Compile Include="Models\LoginModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -326,6 +331,7 @@
     <Content Include="Assets\Admin\pages\widget\amchart\worldLow.js" />
     <Content Include="Assets\Admin\pages\widget\amchart\worldLow.min.js" />
     <Content Include="Assets\Admin\pages\widget\excanvas.js" />
+    <Content Include="Assets\Image\lk1.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />

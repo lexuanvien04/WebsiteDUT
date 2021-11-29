@@ -15,7 +15,7 @@ namespace WebsiteDUT.Areas.Admin.Controllers
 {
     public class LoaiChuyenMucsController : BaseController
     {
-        private WebsiteDTUDbContext db = new WebsiteDTUDbContext();
+        private WebsiteDUTDbContext db = new WebsiteDUTDbContext();
 
         // GET: Admin/LoaiChuyenMucs
         public ActionResult Index(string searchString, int page = 1, int pagesize = 5)
@@ -57,11 +57,38 @@ namespace WebsiteDUT.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MaLoaiChuyenMuc,TenLoaiChuyenMuc,DuongDan,TrangThai")] LoaiChuyenMuc loaiChuyenMuc)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.LoaiChuyenMucs.Add(loaiChuyenMuc);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    if (string.IsNullOrEmpty(loaiChuyenMuc.MaLoaiChuyenMuc))
+                    {
+                        SetAlert("Không được để trống!", "warning");
+                        return View();
+                    }
+                    var dao = new LoaiChuyenMucDao();
+                    string result;
+                    
+                    result = dao.Insert(loaiChuyenMuc);
+
+                    if (result != null)
+                    {
+                        SetAlert("Tạo mới thành công!", "success");
+                        return RedirectToAction("Index", "LoaiChuyenMucs");
+                    }
+                    else
+                    {
+                        SetAlert("Tạo mới thất bại!", "error");
+                    }
+
+                    db.LoaiChuyenMucs.Add(loaiChuyenMuc);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.Common.WriteLog("LoaiChuyenMucs", "Create-Post", ex.ToString());
             }
 
             return View(loaiChuyenMuc);

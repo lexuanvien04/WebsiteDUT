@@ -7,7 +7,7 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "QuyenNguoiDungs", FormMethod.Post, new { role = "form", enctype = "multipart/form-data", onsubmit = "AJAXSubmit(this);return false;" })) 
 {
     @Html.AntiForgeryToken()
     

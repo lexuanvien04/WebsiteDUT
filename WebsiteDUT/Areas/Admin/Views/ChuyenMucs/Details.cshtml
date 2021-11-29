@@ -1,4 +1,5 @@
 ﻿@model ModelEF.EF.ChuyenMuc
+@using WebsiteDUT.Helper
 
 @{
     ViewBag.Title = "Details";
@@ -48,7 +49,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AnhDaiDien)
+            @Html.Image(Model.AnhDaiDien, "Image", new { width = "30%" })
         </dd>
 
         <dt>
@@ -85,6 +86,7 @@
 
     </dl>
 </div>
+<hr/>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.MaChuyenMuc }) |
     @Html.ActionLink("Back to List", "Index")

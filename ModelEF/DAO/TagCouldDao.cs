@@ -10,11 +10,11 @@ namespace ModelEF.DAO
 {
     public class TagCouldDao
     {
-        private WebsiteDTUDbContext db;
+        private WebsiteDUTDbContext db;
 
         public TagCouldDao()
         {
-            db = new WebsiteDTUDbContext();
+            db = new WebsiteDUTDbContext();
         }
         public IEnumerable<TagCould> ListWhereAll(string keysearch, int page, int pagesize)
         {
@@ -25,6 +25,41 @@ namespace ModelEF.DAO
             }
 
             return model.OrderBy(x => x.TenCould).ToPagedList(page, pagesize);
+        }
+
+        public TagCould Find(string id)
+        {
+            return db.TagCoulds.Find(id);
+        }
+
+        public string Insert(TagCould entityTagCloud)
+        {
+            var dao = Find(entityTagCloud.MaTagCould);
+            if (dao == null)
+            {
+                db.TagCoulds.Add(entityTagCloud);
+            }
+            else
+            {
+                dao.TenCould = entityTagCloud.TenCould;
+            }
+            db.SaveChanges();
+            return entityTagCloud.MaTagCould;
+        }
+
+        public string Edit(TagCould entity)
+        {
+            var dao = Find(entity.MaTagCould);
+            if (dao == null)
+            {
+                db.TagCoulds.Add(entity);
+            }
+            else
+            {
+                dao.TenCould = entity.TenCould;
+            }
+            db.SaveChanges();
+            return entity.MaTagCould;
         }
     }
 }

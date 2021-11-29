@@ -1,5 +1,6 @@
 ﻿@using PagedList.Mvc;
 @model PagedList.IPagedList<ModelEF.EF.QuangCao>
+@using WebsiteDUT.Helper
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -10,7 +11,7 @@
     @using (Html.BeginForm("Index", "QuangCaos", FormMethod.Post))
     {
         <div class="card-header">
-            <h5><i class="fa fa-user" style="color: blue;"></i>&nbsp;DANH MỤC LOẠI CHUYÊN MỤC</h5>
+            <h5><i class="fa fa-user" style="color: blue;"></i>&nbsp;DANH MỤC QUẢNG CÁO</h5>
             <div class="card-header-right">
                 <ul class="list-unstyled card-option">
                     <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -39,6 +40,7 @@
                 <thead>
                     <tr>
                         <th>STT</th>
+                        <th>Mã quảng cáo</th>
                         <th>
                             Tên quảng cáo
                         </th>
@@ -61,29 +63,32 @@
                     @{ var i = 1;}
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <th>@i</th>
-                            <td>
-                                @item.TenQuangCao
-                            </td>
-                            <td>
-                                @item.DuongDan
-                            </td>
-                            <td>
-                                @item.AnhDaiDien
-                            </td>
-                            <td>
-                                @item.NgayCapNhat
-                            </td>
-                            <td>
-                                @item.TrangThai
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.MaQuangCao }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.MaQuangCao }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.MaQuangCao })
-                            </td>
-                        </tr>
+                    <tr>
+                        <th>@i</th>
+                        <td>
+                            @item.MaQuangCao
+                        </td>
+                        <td>
+                            @item.TenQuangCao
+                        </td>
+                        <td>
+                            @item.DuongDan
+                        </td>
+                        <td>
+                            @Html.Image(item.AnhDaiDien, "Image", new { width = "100px", heigth = "80px" })
+                        </td>
+                        <td>
+                            @item.NgayCapNhat
+                        </td>
+                        <td>
+                            @item.TrangThai
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.MaQuangCao }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.MaQuangCao }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.MaQuangCao })
+                        </td>
+                    </tr>
                         i++;
                     }
                 </tbody>

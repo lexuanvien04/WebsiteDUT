@@ -10,11 +10,11 @@ namespace ModelEF.DAO
 {
     public class DonViDao
     {
-        private WebsiteDTUDbContext db;
+        private WebsiteDUTDbContext db;
 
         public DonViDao()
         {
-            db = new WebsiteDTUDbContext();
+            db = new WebsiteDUTDbContext();
         }
         public IEnumerable<DonVi> ListWhereAll(string keysearch, int page, int pagesize)
         {
@@ -25,6 +25,25 @@ namespace ModelEF.DAO
             }
 
             return model.OrderBy(x => x.TenDonVi).ToPagedList(page, pagesize);
+        }
+
+        public DonVi Find(string id)
+        {
+            return db.DonVis.Find(id);
+        }
+        public string Insert(DonVi entityDonVi)
+        {
+            var dao = Find(entityDonVi.MaDonVi);
+            if (dao == null)
+            {
+                db.DonVis.Add(entityDonVi);
+            }
+            else
+            {
+                dao.TenDonVi = entityDonVi.TenDonVi;
+            }
+            db.SaveChanges();
+            return entityDonVi.MaDonVi;
         }
     }
 }

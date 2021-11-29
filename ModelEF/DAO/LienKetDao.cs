@@ -10,12 +10,18 @@ namespace ModelEF.DAO
 {
     public class LienKetDao
     {
-        private WebsiteDTUDbContext db;
+        private WebsiteDUTDbContext db;
 
         public LienKetDao()
         {
-            db = new WebsiteDTUDbContext();
+            db = new WebsiteDUTDbContext();
         }
+
+        public LienKet Find(string id)
+        {
+            return db.LienKets.Find(id);
+        }
+
         public IEnumerable<LienKet> ListWhereAll(string keysearch, int page, int pagesize)
         {
             IQueryable<LienKet> model = db.LienKets;
@@ -25,6 +31,36 @@ namespace ModelEF.DAO
             }
 
             return model.OrderBy(x => x.MaLienKet).ToPagedList(page, pagesize);
+        }
+
+        public string Insert(LienKet entityLienKet)
+        {
+            var dao = Find(entityLienKet.MaLienKet);
+            if (dao == null)
+            {
+                db.LienKets.Add(entityLienKet);
+            }
+            else
+            {
+                dao.Duongdan = entityLienKet.Duongdan;
+            }
+            db.SaveChanges();
+            return entityLienKet.MaLienKet;
+        }
+
+        public string Edit(LienKet entity)
+        {
+            var dao = Find(entity.MaLienKet);
+            if (dao == null)
+            {
+                db.LienKets.Add(entity);
+            }
+            else
+            {
+                dao.AnhDaiDien = entity.AnhDaiDien;
+            }
+            db.SaveChanges();
+            return entity.MaLienKet;
         }
     }
 }

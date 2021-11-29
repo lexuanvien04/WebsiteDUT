@@ -40,6 +40,7 @@
                 <thead>
                     <tr>
                         <th>STT</th>
+                        <th>Mã đơn vị</th>
                         <th>
                             TenLoaiDonVi
                         </th>
@@ -47,7 +48,7 @@
                             Tên đơn vị
                         </th>
                         <th>
-                           Trạng thái
+                            Trạng thái
                         </th>
                         <th></th>
                     </tr>
@@ -57,23 +58,26 @@
                     @foreach (var item in Model)
                     {
                         
-                            <tr>
-                                <td>@i</td>
-                                <td>
-                                    @item.LoaiDonVi.TenLoaiDonVi
-                                </td>
-                                <td>
-                                    @item.TenDonVi
-                                </td>
-                                <td>
-                                    @item.TrangThai
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.MaDonVi }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.MaDonVi }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.MaDonVi })
-                                </td>
-                            </tr>
+                    <tr>
+                        <td>@i</td>
+                        <td>
+                            @item.MaDonVi
+                        </td>
+                        <td>
+                            @item.LoaiDonVi.TenLoaiDonVi
+                        </td>
+                        <td>
+                            @item.TenDonVi
+                        </td>
+                        <td>
+                            @item.TrangThai
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.MaDonVi }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.MaDonVi }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.MaDonVi })
+                        </td>
+                    </tr>
                             i++;
                        
                     }

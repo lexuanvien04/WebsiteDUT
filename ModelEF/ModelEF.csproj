@@ -78,7 +78,7 @@
     <Compile Include="EF\QuyenNguoiDung.cs" />
     <Compile Include="EF\sysdiagram.cs" />
     <Compile Include="EF\TagCould.cs" />
-    <Compile Include="EF\WebsiteDTUDbContext.cs" />
+    <Compile Include="EF\WebsiteDUTDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

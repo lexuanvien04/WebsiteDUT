@@ -10,11 +10,11 @@ namespace ModelEF.DAO
 {
     public class QuyenNguoiDungDao
     {
-        private WebsiteDTUDbContext db;
+        private WebsiteDUTDbContext db;
 
         public QuyenNguoiDungDao()
         {
-            db = new WebsiteDTUDbContext();
+            db = new WebsiteDUTDbContext();
         }
         public IEnumerable<QuyenNguoiDung> ListWhereAll(string keysearch, int page, int pagesize)
         {
@@ -25,6 +25,41 @@ namespace ModelEF.DAO
             }
 
             return model.OrderBy(x => x.MaQuyen).ToPagedList(page, pagesize);
+        }
+
+        public QuyenNguoiDung Find(string id)
+        {
+            return db.QuyenNguoiDungs.Find(id);
+        }
+
+        public string Insert(QuyenNguoiDung entityQuyenND)
+        {
+            var dao = Find(entityQuyenND.MaQuyen);
+            if (dao == null)
+            {
+                db.QuyenNguoiDungs.Add(entityQuyenND);
+            }
+            else
+            {
+                dao.TenQuyen = entityQuyenND.TenQuyen;
+            }
+            db.SaveChanges();
+            return entityQuyenND.MaQuyen;
+        }
+
+        public string Edit(QuyenNguoiDung entity)
+        {
+            var dao = Find(entity.MaQuyen);
+            if (dao == null)
+            {
+                db.QuyenNguoiDungs.Add(entity);
+            }
+            else
+            {
+                dao.TenQuyen = entity.TenQuyen;
+            }
+            db.SaveChanges();
+            return entity.MaQuyen;
         }
     }
 }

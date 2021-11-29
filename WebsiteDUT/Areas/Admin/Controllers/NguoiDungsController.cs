@@ -13,7 +13,7 @@ namespace WebsiteDUT.Areas.Admin.Controllers
 {
     public class NguoiDungsController : BaseController
     {
-        private WebsiteDTUDbContext db = new WebsiteDTUDbContext();
+        private WebsiteDUTDbContext db = new WebsiteDUTDbContext();
 
         // GET: Admin/NguoiDungs
         public ActionResult Index(string searchString, int page = 1, int pagesize = 5)
@@ -53,13 +53,37 @@ namespace WebsiteDUT.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MaNguoiDung,HoTen,TenTruycap,MatKhau,NgayCapNhat,TrangThai")] NguoiDung nguoiDung)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.NguoiDungs.Add(nguoiDung);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                if (ModelState.IsValid)
+                {
+                    if (string.IsNullOrEmpty(nguoiDung.MaNguoiDung))
+                    {
+                        SetAlert("Không được để trống!", "warning");
+                        return View();
+                    }
+                    var dao = new UserDao();
+                    string result;
+                    result = dao.Insert(nguoiDung);
 
+                    if (result != null)
+                    {
+                        SetAlert("Tạo mới thành công!", "success");
+                        return RedirectToAction("Index", "NguoiDungs");
+                    }
+                    else
+                    {
+                        SetAlert("Tạo mới thất bại!", "error");
+                    }
+                    db.NguoiDungs.Add(nguoiDung);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.Common.WriteLog("NguoiDungs", "Create-Post", ex.ToString());
+            }
             return View(nguoiDung);
         }
 

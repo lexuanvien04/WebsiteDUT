@@ -5,10 +5,10 @@ using System.Linq;
 
 namespace ModelEF.EF
 {
-    public partial class WebsiteDTUDbContext : DbContext
+    public partial class WebsiteDUTDbContext : DbContext
     {
-        public WebsiteDTUDbContext()
-            : base("name=WebsiteDTUDbContext")
+        public WebsiteDUTDbContext()
+            : base("name=WebsiteDUTDbContext")
         {
         }
 
@@ -20,6 +20,7 @@ namespace ModelEF.EF
         public virtual DbSet<NguoiDung> NguoiDungs { get; set; }
         public virtual DbSet<QuangCao> QuangCaos { get; set; }
         public virtual DbSet<QuyenNguoiDung> QuyenNguoiDungs { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TagCould> TagCoulds { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

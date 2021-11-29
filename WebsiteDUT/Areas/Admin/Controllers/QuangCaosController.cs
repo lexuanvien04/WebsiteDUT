@@ -13,7 +13,7 @@ namespace WebsiteDUT.Areas.Admin.Controllers
 {
     public class QuangCaosController : BaseController
     {
-        private WebsiteDTUDbContext db = new WebsiteDTUDbContext();
+        private WebsiteDUTDbContext db = new WebsiteDUTDbContext();
 
         // GET: Admin/QuangCaos
         public ActionResult Index(string searchString, int page = 1, int pagesize = 5)
@@ -51,13 +51,49 @@ namespace WebsiteDUT.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaQuangCao,TenQuangCao,DuongDan,AnhDaiDien,NgayCapNhat,TrangThai")] QuangCao quangCao)
+        public ActionResult Create(QuangCao quangCao, HttpPostedFileBase image)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.QuangCaos.Add(quangCao);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    if (string.IsNullOrEmpty(quangCao.MaQuangCao))
+                    {
+                        SetAlert("Không được để trống!", "warning");
+                        return View();
+                    }
+                    var dao = new QuangCaoDao();
+                    string result;
+                    image = Request.Files["ImageData"];
+                    if (image != null && image.ContentLength > 0)
+                    {
+                        quangCao.AnhDaiDien = new byte[image.ContentLength]; // image stored-in binary formate
+                        image.InputStream.Read(quangCao.AnhDaiDien, 0, image.ContentLength);
+                        string fileName = System.IO.Path.GetFileName(image.FileName);
+                        string urlImage = Server.MapPath("~/Assets/Image/" + fileName);
+                        image.SaveAs(urlImage);
+
+                    }
+                    result = dao.Insert(quangCao);
+
+                    if (result != null)
+                    {
+                        SetAlert("Tạo mới thành công!", "success");
+                        return RedirectToAction("Index", "QuangCaos");
+                    }
+                    else
+                    {
+                        SetAlert("Tạo mới thất bại!", "error");
+                    }
+
+                    db.QuangCaos.Add(quangCao);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.Common.WriteLog("QuangCaos", "Create-Post", ex.ToString());
             }
 
             return View(quangCao);
@@ -83,10 +119,19 @@ namespace WebsiteDUT.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaQuangCao,TenQuangCao,DuongDan,AnhDaiDien,NgayCapNhat,TrangThai")] QuangCao quangCao)
+        public ActionResult Edit(QuangCao quangCao, HttpPostedFileBase editImage)
         {
             if (ModelState.IsValid)
             {
+
+                if (editImage != null && editImage.ContentLength > 0)
+                {
+                    quangCao.AnhDaiDien = new byte[editImage.ContentLength]; // image stored in binary fomate 
+                    editImage.InputStream.Read(quangCao.AnhDaiDien, 0, editImage.ContentLength);
+                    string fileName = System.IO.Path.GetFileName(editImage.FileName);
+                    string urlImage = Server.MapPath("~/Assets/Image/" + fileName);
+                    editImage.SaveAs(urlImage);
+                }
                 db.Entry(quangCao).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

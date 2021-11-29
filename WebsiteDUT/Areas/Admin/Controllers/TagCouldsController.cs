@@ -13,7 +13,7 @@ namespace WebsiteDUT.Areas.Admin.Controllers
 {
     public class TagCouldsController : BaseController
     {
-        private WebsiteDTUDbContext db = new WebsiteDTUDbContext();
+        private WebsiteDUTDbContext db = new WebsiteDUTDbContext();
 
         // GET: Admin/TagCoulds
         public ActionResult Index(string searchString, int page = 1, int pagesize = 5)
@@ -53,11 +53,38 @@ namespace WebsiteDUT.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MaTagCould,TenCould,TrangThai")] TagCould tagCould)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.TagCoulds.Add(tagCould);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    if (string.IsNullOrEmpty(tagCould.MaTagCould))
+                    {
+                        SetAlert("Không được để trống!", "warning");
+                        return View();
+                    }
+                    var dao = new TagCouldDao();
+                    string result;
+
+                    result = dao.Insert(tagCould);
+
+                    if (result != null)
+                    {
+                        SetAlert("Tạo mới thành công!", "success");
+                        return RedirectToAction("Index", "TagCoulds");
+                    }
+                    else
+                    {
+                        SetAlert("Tạo mới thất bại!", "error");
+                    }
+
+                    db.TagCoulds.Add(tagCould);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.Common.WriteLog("TagCoulds", "Create-Post", ex.ToString());
             }
 
             return View(tagCould);

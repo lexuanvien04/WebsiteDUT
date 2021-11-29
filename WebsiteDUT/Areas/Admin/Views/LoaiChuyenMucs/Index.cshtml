@@ -41,6 +41,7 @@
                 <thead>
                     <tr>
                         <th>STT</th>
+                        <th>Mã loại chuyên mục</th>
                         <th>Tên chuyên mục</th>
                         <th>Đường dẫn</th>
                         <th>Trạng Thái</th>
@@ -51,23 +52,26 @@
                     @{ var i = 1;}
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <th>@i</th>
-                            <td>
-                                @item.TenLoaiChuyenMuc
-                            </td>
-                            <td>
-                                @item.DuongDan
-                            </td>
-                            <td>
-                                @item.TrangThai
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.MaLoaiChuyenMuc }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.MaLoaiChuyenMuc }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.MaLoaiChuyenMuc })
-                            </td>
-                        </tr>
+                    <tr>
+                        <th>@i</th>
+                        <td>
+                            @item.MaLoaiChuyenMuc
+                        </td>
+                        <td>
+                            @item.TenLoaiChuyenMuc
+                        </td>
+                        <td>
+                            @item.DuongDan
+                        </td>
+                        <td>
+                            @item.TrangThai
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.MaLoaiChuyenMuc }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.MaLoaiChuyenMuc }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.MaLoaiChuyenMuc })
+                        </td>
+                    </tr>
                         i++;
                     }
                 </tbody>

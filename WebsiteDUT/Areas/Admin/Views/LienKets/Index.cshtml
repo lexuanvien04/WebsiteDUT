@@ -1,5 +1,6 @@
 ﻿@using PagedList.Mvc;
 @model PagedList.IPagedList<ModelEF.EF.LienKet>
+@using WebsiteDUT.Helper
 
 @{
     ViewBag.Title = "Index";
@@ -11,7 +12,7 @@
     @using (Html.BeginForm("Index", "LienKets", FormMethod.Post))
     {
         <div class="card-header">
-            <h5><i class="fa fa-user" style="color: blue;"></i>&nbsp;DANH MỤC LOẠI CHUYÊN MỤC</h5>
+            <h5><i class="fa fa-user" style="color: blue;"></i>&nbsp;DANH MỤC LIÊN KẾT</h5>
             <div class="card-header-right">
                 <ul class="list-unstyled card-option">
                     <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -47,7 +48,7 @@
                             Ảnh đại diện
                         </th>
                         <th>
-                           Đường dẩn
+                            Đường dẩn
                         </th>
                         <th>
                             Trạng Thái
@@ -59,27 +60,27 @@
                     @{ var i = 1;}
                     @foreach (var item in Model)
                     {
-                    <tr>
-                        <th>@i</th>
-                        <td>
-                            @item.MaLienKet
-                        </td>
-                        <td>
-                            @item.AnhDaiDien
-                        </td>
-                        <td>
-                            @item.Duongdan
-                        </td>
-                        <td>
-                            @item.TrangThai
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.MaLienKet }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.MaLienKet }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.MaLienKet })
-                        </td>
-                    </tr>
-i++;
+                        <tr>
+                            <th>@i</th>
+                            <td>
+                                @item.MaLienKet
+                            </td>
+                            <td>
+                                @Html.Image(item.AnhDaiDien, "Image", new { width = "100px", heigth = "50px" })
+                            </td>
+                            <td>
+                                @item.Duongdan
+                            </td>
+                            <td>
+                                @item.TrangThai
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.MaLienKet }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.MaLienKet }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.MaLienKet })
+                            </td>
+                        </tr>
+                        i++;
                     }
                 </tbody>
             </table>

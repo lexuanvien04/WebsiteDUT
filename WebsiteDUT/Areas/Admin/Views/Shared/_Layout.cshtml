@@ -133,6 +133,12 @@
                             <div class="main-body">
                                 <div class="page-wrapper">
                                     <!-- Page-body start -->
+                                    @if (TempData["AlertMessage"] != null)
+                                    {
+                                        <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+                                            @TempData["AlertMessage"]
+                                        </div>
+                                    }
                                     @RenderBody()
                                     <!-- Page-body end -->
                                 </div>
@@ -163,6 +169,13 @@
     <script src="~/Assets/Admin/js/vertical/vertical-layout.min.js "></script>
 
     <script type="text/javascript" src="~/Assets/Admin/js/script.js "></script>
+
+    <script>
+        $(function () {
+            $('#AlertBox').removeClass('hide');
+            $('#AlertBox').delay(3000).slideUp(500);
+        });
+    </script>
     @RenderSection("jsFooter", required: false)
 </body>
 
