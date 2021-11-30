@@ -63,32 +63,30 @@
                     @{ var i = 1;}
                     @foreach (var item in Model)
                     {
-                    <tr>
-                        <th>@i</th>
-                        <td>
-                            @item.MaQuangCao
-                        </td>
-                        <td>
-                            @item.TenQuangCao
-                        </td>
-                        <td>
-                            @item.DuongDan
-                        </td>
-                        <td>
-                            @Html.Image(item.AnhDaiDien, "Image", new { width = "100px", heigth = "80px" })
-                        </td>
-                        <td>
-                            @item.NgayCapNhat
-                        </td>
-                        <td>
-                            @item.TrangThai
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.MaQuangCao }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.MaQuangCao }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.MaQuangCao })
-                        </td>
-                    </tr>
+                        <tr id="row_@item.MaQuangCao">
+                            <th>@i</th>
+                            <td>
+                                @item.MaQuangCao
+                            </td>
+                            <td>
+                                @item.TenQuangCao
+                            </td>
+                            <td>
+                                @item.DuongDan
+                            </td>
+                            <td>
+                                @Html.Image(item.AnhDaiDien, "Image", new { width = "100px", heigth = "80px" })
+                            </td>
+                            <td>
+                                @item.NgayCapNhat
+                            </td>
+                            <td><a href="#" class="btn btn-danger btn-active" data-id="@item.MaQuangCao">@(item.TrangThai ?"Kích hoạt":"Khoá")</a></td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.MaQuangCao }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.MaQuangCao }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.MaQuangCao })
+                            </td>
+                        </tr>
                         i++;
                     }
                 </tbody>
@@ -97,6 +95,8 @@
         </div>
     </div>
 </div>
-
+@section jsFooter{
+    <script src="~/Assets/Admin/js/controller/QuangCaoController.js"></script>
+}
 
 <!-- Basic table card end -->

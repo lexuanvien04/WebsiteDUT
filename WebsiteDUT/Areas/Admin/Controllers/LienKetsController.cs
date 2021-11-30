@@ -174,5 +174,14 @@ namespace WebsiteDUT.Areas.Admin.Controllers
             }
             base.Dispose(disposing);
         }
+        [HttpPost]
+        public JsonResult LienKetTrangThai(string id)
+        {
+            var result = new LienKetDao().LienKetTrangThai(id);
+            return Json(new
+            {
+                status = result
+            });
+        }
     }
 }

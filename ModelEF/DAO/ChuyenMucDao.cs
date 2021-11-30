@@ -31,7 +31,13 @@ namespace ModelEF.DAO
         {
             return db.ChuyenMucs.Find(TenChuyenMuc);
         }
-
+        public bool ChuyenMucTrangThai(string id)
+        {
+            var cm = db.ChuyenMucs.Find(id);
+            cm.Trangthai = !cm.Trangthai;
+            db.SaveChanges();
+            return cm.Trangthai;
+        }
         public string Insert(ChuyenMuc entityCMuc)
         {
             var dao = Find(entityCMuc.MaChuyenMuc);

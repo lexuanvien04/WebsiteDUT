@@ -155,5 +155,14 @@ namespace WebsiteDUT.Areas.Admin.Controllers
             }
             base.Dispose(disposing);
         }
+        [HttpPost]
+        public JsonResult TagCouldTrangThai(string id)
+        {
+            var result = new TagCouldDao().TagCouldTrangThai(id);
+            return Json(new
+            {
+                status = result
+            });
+        }
     }
 }

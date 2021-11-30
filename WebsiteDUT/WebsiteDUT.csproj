@@ -250,6 +250,13 @@
     <Content Include="Assets\Admin\js\color-json-common-page.js" />
     <Content Include="Assets\Admin\js\common-pages.js" />
     <Content Include="Assets\Admin\js\common-pages.min.js" />
+    <Content Include="Assets\Admin\js\controller\TagCouldController .js" />
+    <Content Include="Assets\Admin\js\controller\LoaiChuyenMucController.js" />
+    <Content Include="Assets\Admin\js\controller\LienKetController.js" />
+    <Content Include="Assets\Admin\js\controller\DonViController.js" />
+    <Content Include="Assets\Admin\js\controller\QuangCaoController.js" />
+    <Content Include="Assets\Admin\js\controller\LoaiDonViController.js" />
+    <Content Include="Assets\Admin\js\controller\ChuyenMucController.js" />
     <Content Include="Assets\Admin\js\controller\userController.js" />
     <Content Include="Assets\Admin\js\counter.js" />
     <Content Include="Assets\Admin\js\float\curvedLines.js" />

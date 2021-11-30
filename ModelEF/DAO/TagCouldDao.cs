@@ -31,7 +31,13 @@ namespace ModelEF.DAO
         {
             return db.TagCoulds.Find(id);
         }
-
+        public bool TagCouldTrangThai(string id)
+        {
+            var user = db.TagCoulds.Find(id);
+            user.TrangThai = !user.TrangThai;
+            db.SaveChanges();
+            return user.TrangThai;
+        }
         public string Insert(TagCould entityTagCloud)
         {
             var dao = Find(entityTagCloud.MaTagCould);

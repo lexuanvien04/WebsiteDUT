@@ -30,6 +30,13 @@ namespace ModelEF.DAO
         {
             return db.LienKets.Find(id);
         }
+        public bool QuangCaoTrangThai(string id)
+        {
+            var user = db.QuangCaos.Find(id);
+            user.TrangThai = !user.TrangThai;
+            db.SaveChanges();
+            return user.TrangThai;
+        }
         public string Insert(QuangCao entityQuangCao)
         {
             var dao = Find(entityQuangCao.MaQuangCao);

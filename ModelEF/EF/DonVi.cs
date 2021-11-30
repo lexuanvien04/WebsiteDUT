@@ -27,7 +27,7 @@ namespace ModelEF.EF
         [StringLength(100)]
         public string TenDonVi { get; set; }
 
-        public bool? TrangThai { get; set; }
+        public bool TrangThai { get; set; }
 
         public virtual LoaiDonVi LoaiDonVi { get; set; }
 

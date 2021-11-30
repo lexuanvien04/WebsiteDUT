@@ -57,35 +57,35 @@
                     @{ var i = 1;}
                     @foreach (var item in Model)
                     {
-                        
-                    <tr>
-                        <td>@i</td>
-                        <td>
-                            @item.MaDonVi
-                        </td>
-                        <td>
-                            @item.LoaiDonVi.TenLoaiDonVi
-                        </td>
-                        <td>
-                            @item.TenDonVi
-                        </td>
-                        <td>
-                            @item.TrangThai
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.MaDonVi }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.MaDonVi }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.MaDonVi })
-                        </td>
-                    </tr>
-                            i++;
-                       
+
+                        <tr id="row_@item.MaDonVi">
+                            <td>@i</td>
+                            <td>
+                                @item.MaDonVi
+                            </td>
+                            <td>
+                                @item.LoaiDonVi.TenLoaiDonVi
+                            </td>
+                            <td>
+                                @item.TenDonVi
+                            </td>
+                            <td><a href="#" class="btn btn-danger btn-active" data-id="@item.MaDonVi">@(item.TrangThai ?"Kích hoạt":"Khoá")</a></td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.MaDonVi }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.MaDonVi }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.MaDonVi })
+                            </td>
+                        </tr>
+                        i++;
+
                     }
                 </tbody>
             </table>
             @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))
         </div>
     </div>
-  </div>
-
+</div>
+@section jsFooter{
+    <script src="~/Assets/Admin/js/controller/DonViController.js"></script>
+    }
     <!-- Basic table card end -->

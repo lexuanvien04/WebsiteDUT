@@ -21,7 +21,13 @@ namespace ModelEF.DAO
         {
             return db.LienKets.Find(id);
         }
-
+        public bool LienKetTrangThai(string id)
+        {
+            var user = db.LienKets.Find(id);
+            user.TrangThai = !user.TrangThai;
+            db.SaveChanges();
+            return user.TrangThai;
+        }
         public IEnumerable<LienKet> ListWhereAll(string keysearch, int page, int pagesize)
         {
             IQueryable<LienKet> model = db.LienKets;

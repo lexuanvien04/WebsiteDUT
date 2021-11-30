@@ -157,5 +157,14 @@ namespace WebsiteDUT.Areas.Admin.Controllers
             }
             base.Dispose(disposing);
         }
+        [HttpPost]
+        public JsonResult LoaiDonViTrangThai(string id)
+        {
+            var result = new LoaiDonViDao().LoaiDonViTrangThai(id);
+            return Json(new
+            {
+                status = result
+            });
+        }
     }
 }

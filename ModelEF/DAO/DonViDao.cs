@@ -31,6 +31,13 @@ namespace ModelEF.DAO
         {
             return db.DonVis.Find(id);
         }
+        public bool DonViTrangThai(string id)
+        {
+            var user = db.DonVis.Find(id);
+            user.TrangThai = !user.TrangThai;
+            db.SaveChanges();
+            return user.TrangThai;
+        }
         public string Insert(DonVi entityDonVi)
         {
             var dao = Find(entityDonVi.MaDonVi);

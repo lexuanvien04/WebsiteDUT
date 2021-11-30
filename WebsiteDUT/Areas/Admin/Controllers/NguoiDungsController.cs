@@ -107,6 +107,8 @@ namespace WebsiteDUT.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                var pass = Encryptor.EncryptorMD5(nguoiDung.MatKhau);
+                nguoiDung.MatKhau = pass;
                 db.Entry(nguoiDung).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

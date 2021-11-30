@@ -173,5 +173,14 @@ namespace WebsiteDUT.Areas.Admin.Controllers
             }
             base.Dispose(disposing);
         }
+        [HttpPost]
+        public JsonResult QuangCaoTrangThai(string id)
+        {
+            var result = new QuangCaoDao().QuangCaoTrangThai(id);
+            return Json(new
+            {
+                status = result
+            });
+        }
     }
 }

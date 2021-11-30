@@ -52,32 +52,32 @@
                 <tbody>
                     @{ var i = 1;}
                     @foreach (var item in Model)
-                     {
-                    <tr>
-                        <th>@i</th>
-                        <td>
-                            @item.MaloaiDonVi
-                        </td>
-                        <td>
-                            @item.TenLoaiDonVi
-                        </td>
-                        <td>
-                            @item.TrangThai
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.MaloaiDonVi }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.MaloaiDonVi }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.MaloaiDonVi })
-                        </td>
-                    </tr>
+                    {
+                        <tr id="row_@item.MaloaiDonVi">
+                            <th>@i</th>
+                            <td>
+                                @item.MaloaiDonVi
+                            </td>
+                            <td>
+                                @item.TenLoaiDonVi
+                            </td>
+                            <td><a href="#" class="btn btn-danger btn-active" data-id="@item.MaloaiDonVi">@(item.TrangThai ?"Kích hoạt":"Khoá")</a></td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.MaloaiDonVi }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.MaloaiDonVi }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.MaloaiDonVi })
+                            </td>
+                        </tr>
                         i++;
                     }
-                    
+
                 </tbody>
             </table>
             @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))
         </div>
     </div>
-    </div>
-
-    <!-- Basic table card end -->
+</div>
+@section jsFooter{
+    <script src="~/Assets/Admin/js/controller/LoaiDonViController.js"></script>
+}
+<!-- Basic table card end -->

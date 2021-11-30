@@ -181,5 +181,14 @@ namespace WebsiteDUT.Areas.Admin.Controllers
             }
             base.Dispose(disposing);
         }
+        [HttpPost]
+        public JsonResult ChuyenMucTrangThai(string id)
+        {
+            var result = new ChuyenMucDao().ChuyenMucTrangThai(id);
+            return Json(new
+            {
+                status = result
+            });
+        }
     }
 }

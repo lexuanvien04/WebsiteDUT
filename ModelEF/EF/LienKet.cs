@@ -17,6 +17,6 @@ namespace ModelEF.EF
 
         public string Duongdan { get; set; }
 
-        public bool? TrangThai { get; set; }
+        public bool TrangThai { get; set; }
     }
 }

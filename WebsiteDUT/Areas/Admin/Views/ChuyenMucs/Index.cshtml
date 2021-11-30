@@ -11,7 +11,7 @@
     @using (Html.BeginForm("Index", "ChuyenMucs", FormMethod.Post))
     {
         <div class="card-header">
-            <h5><i class="fa fa-user" style="color: blue;"></i>&nbsp;DANH MỤC CHUYÊN MỤC</h5>
+            <h5><i class="fa fa-user" style="color: blue;"></i>&nbsp;QUẢN TRỊ CHUYÊN MỤC</h5>
             <div class="card-header-right">
                 <ul class="list-unstyled card-option">
                     <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -79,45 +79,43 @@
                     @{ var i = 1;}
                     @foreach (var item in Model)
                     {
-                    <tr>
-                        <td>@i</td>
-                        <td>
-                            @item.MaLoaiChuyenMuc   
-                        </td>
-                        <td>
-                            @item.LoaiChuyenMuc.TenLoaiChuyenMuc
-                        </td>
+                        <tr id="row_@item.MaChuyenMuc">
+                            <td>@i</td>
+                            <td>
+                                @item.MaLoaiChuyenMuc
+                            </td>
+                            <td>
+                                @item.LoaiChuyenMuc.TenLoaiChuyenMuc
+                            </td>
 
-                        <td>
-                            @item.TenChuyenMuc
-                        </td>
-                        <td>
-                            @item.TieuDe
-                        </td>
-                        <td>
-                            @Html.Image(item.AnhDaiDien, "Image", new { width = "100px", heigth = "80px" })
-                        </td>
-                        <td style="width: 300px">
-                            @item.NoiDung
-                        </td>
-                        <td>
-                            @item.NgayCapNhat
-                        </td>
-                        <td>
-                            @item.NguoiDung.HoTen
-                        </td>
-                        <td>
-                            @item.LuotXem
-                        </td>
-                        <td>
-                            @item.Trangthai
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.MaChuyenMuc }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.MaChuyenMuc }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.MaChuyenMuc })
-                        </td>
-                    </tr>
+                            <td>
+                                @item.TenChuyenMuc
+                            </td>
+                            <td>
+                                @item.TieuDe
+                            </td>
+                            <td>
+                                @Html.Image(item.AnhDaiDien, "Image", new { width = "100px", heigth = "80px" })
+                            </td>
+                            <td style="width: 300px">
+                                @item.NoiDung
+                            </td>
+                            <td>
+                                @item.NgayCapNhat
+                            </td>
+                            <td>
+                                @item.NguoiDung.HoTen
+                            </td>
+                            <td>
+                                @item.LuotXem
+                            </td>
+                            <td><a href="#" class="btn btn-danger btn-active" data-id="@item.MaChuyenMuc">@(item.Trangthai ? "Kích hoạt":"Khoá")</a></td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.MaChuyenMuc }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.MaChuyenMuc }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.MaChuyenMuc })
+                            </td>
+                        </tr>
                         i++;
                     }
                 </tbody>
@@ -127,5 +125,8 @@
     </div>
 </div>
 
+@section jsFooter{
+    <script src="~/Assets/Admin/js/controller/ChuyenMucController.js"></script>
+}
 
 <!-- Basic table card end -->

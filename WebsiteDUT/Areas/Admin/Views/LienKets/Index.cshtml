@@ -60,7 +60,7 @@
                     @{ var i = 1;}
                     @foreach (var item in Model)
                     {
-                        <tr>
+                        <tr id="row_@item.MaLienKet">
                             <th>@i</th>
                             <td>
                                 @item.MaLienKet
@@ -71,9 +71,7 @@
                             <td>
                                 @item.Duongdan
                             </td>
-                            <td>
-                                @item.TrangThai
-                            </td>
+                            <td><a href="#" class="btn btn-danger btn-active" data-id="@item.MaLienKet">@(item.TrangThai ?"Kích hoạt":"Khoá")</a></td>
                             <td>
                                 @Html.ActionLink("Edit", "Edit", new { id = item.MaLienKet }) |
                                 @Html.ActionLink("Details", "Details", new { id = item.MaLienKet }) |
@@ -88,6 +86,8 @@
         </div>
     </div>
 </div>
-
+@section jsFooter{
+    <script src="~/Assets/Admin/js/controller/LienKetController.js"></script>
+}
 
 <!-- Basic table card end -->

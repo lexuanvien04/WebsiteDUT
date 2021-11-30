@@ -52,26 +52,24 @@
                     @{ var i = 1;}
                     @foreach (var item in Model)
                     {
-                    <tr>
-                        <th>@i</th>
-                        <td>
-                            @item.MaLoaiChuyenMuc
-                        </td>
-                        <td>
-                            @item.TenLoaiChuyenMuc
-                        </td>
-                        <td>
-                            @item.DuongDan
-                        </td>
-                        <td>
-                            @item.TrangThai
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.MaLoaiChuyenMuc }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.MaLoaiChuyenMuc }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.MaLoaiChuyenMuc })
-                        </td>
-                    </tr>
+                        <tr id="row_@item.MaLoaiChuyenMuc">
+                            <th>@i</th>
+                            <td>
+                                @item.MaLoaiChuyenMuc
+                            </td>
+                            <td>
+                                @item.TenLoaiChuyenMuc
+                            </td>
+                            <td>
+                                @item.DuongDan
+                            </td>
+                            <td><a href="#" class="btn btn-danger btn-active" data-id="@item.MaLoaiChuyenMuc">@(item.TrangThai ?"Kích hoạt":"Khoá")</a></td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.MaLoaiChuyenMuc }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.MaLoaiChuyenMuc }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.MaLoaiChuyenMuc })
+                            </td>
+                        </tr>
                         i++;
                     }
                 </tbody>
@@ -80,6 +78,8 @@
         </div>
     </div>
 </div>
-
+@section jsFooter{
+    <script src="~/Assets/Admin/js/controller/LoaiChuyenMucController.js"></script>
+}
 
 <!-- Basic table card end -->

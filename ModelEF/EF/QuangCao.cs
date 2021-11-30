@@ -23,6 +23,6 @@ namespace ModelEF.EF
 
         public DateTime? NgayCapNhat { get; set; }
 
-        public bool? TrangThai { get; set; }
+        public bool TrangThai { get; set; }
     }
 }
